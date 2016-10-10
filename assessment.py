@@ -118,17 +118,18 @@ class Exam(object):
     def add_question(self, question, correct_answer):
         """Takes a question and a correct answer, makes a Question,
         and adds the question to the exam's questions."""
-        self.questions.append(question)
         self.question = Question(question, correct_answer)
+        self.questions.append(question)
 
     def administer(self):
         """administers exam"""
-        score = 0.0
+        self.score = 0.0
         for question in self.questions:
+            print question
             if self.question.ask_and_evaluate():
-                score += 1
+                self.score += 1
 
-        return score
+        return self.score
 
 # Part 3
 # Add methods to work above.
@@ -136,10 +137,45 @@ class Exam(object):
 # Part 4
 # Make a real exam.
 
+def take_test(exam, student):
+    """administers exam and assigns the score as a new attribute of the student"""
+    student.score = exam.administer()
+
+def example():
+    """Creates an exam, creates a student, administers the test for the created student."""
+
+    # CREATE THE EXAM AND ADD QUESTIONS
+    midterm = Exam("Midterm")
+    midterm.add_question("What is the capital of Alberta?", "Edmonton")
+    midterm.add_question("What is Meggie's favorite color to wear?", "Black")
+    midterm.add_question("What does Meg do in her free time?", "Trapeze")
+    midterm.add_question("Does Ahmad like cats or dogs?", "Cats")
+    print midterm.questions
+
+    # CREATE THE STUDENT
+    sally = Student("Sally", "Benton", "3030 Castro Street")
+
+    # ADMINISTER THE TEST
+    take_test(midterm, sally)
 
 
 # Part 5
 # Inheritance
+
+class Quiz(Exam):
+    """A quiz is like an exam, except if score > 50%, it should PASS"""
+
+    def administer(self):
+        """administers quiz, but if score > 50%, returns PASS"""
+        
+        super(Quiz, self).administer()
+            
+        percentage = self.score / len(self.questions)
+
+        if percentage > .5:
+            return True
+        return False
+
 
 
 
