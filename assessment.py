@@ -118,15 +118,14 @@ class Exam(object):
     def add_question(self, question, correct_answer):
         """Takes a question and a correct answer, makes a Question,
         and adds the question to the exam's questions."""
-        self.question = Question(question, correct_answer)
+        question = Question(question, correct_answer)
         self.questions.append(question)
 
     def administer(self):
         """administers exam"""
         self.score = 0.0
         for question in self.questions:
-            print question
-            if self.question.ask_and_evaluate():
+            if question.ask_and_evaluate():
                 self.score += 1
 
         return self.score
@@ -150,7 +149,6 @@ def example():
     midterm.add_question("What is Meggie's favorite color to wear?", "Black")
     midterm.add_question("What does Meg do in her free time?", "Trapeze")
     midterm.add_question("Does Ahmad like cats or dogs?", "Cats")
-    print midterm.questions
 
     # CREATE THE STUDENT
     sally = Student("Sally", "Benton", "3030 Castro Street")
