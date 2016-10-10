@@ -140,6 +140,7 @@ def take_test(exam, student):
     """administers exam and assigns the score as a new attribute of the student"""
     student.score = exam.administer()
 
+
 def example():
     """Creates an exam, creates a student, administers the test for the created student."""
 
@@ -155,6 +156,10 @@ def example():
 
     # ADMINISTER THE TEST
     take_test(midterm, sally)
+
+    # What's the score? (just a double check)
+    # return sally.score
+    
 
 
 # Part 5
