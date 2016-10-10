@@ -95,6 +95,14 @@ class Question(object):
         self.question = question
         self.correct_answer = correct_answer
 
+    def ask_and_evaluate(self):
+        """Prompts the user for an answer to a question,
+        returns True/False depending on the answer."""
+        answer = raw_input(self.question + " > ")
+        if answer == self.correct_answer:
+            return True
+        return False
+
 class Exam(object):
     """Exam Class.
 
@@ -107,11 +115,61 @@ class Exam(object):
         self.name = name.title()
         self.questions = []
 
+    def add_question(self, question, correct_answer):
+        """Takes a question and a correct answer, makes a Question,
+        and adds the question to the exam's questions."""
+        self.questions.append(question)
+        self.question = Question(question, correct_answer)
+
+    def administer(self):
+        """administers exam"""
+        score = 0.0
+        for question in self.questions:
+            if self.question.ask_and_evaluate():
+                score += 1
+
+        return score
+
 # Part 3
 # Add methods to work above.
 
 # Part 4
 # Make a real exam.
 
+
+
 # Part 5
 # Inheritance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
